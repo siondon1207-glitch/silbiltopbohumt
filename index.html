@@ -1,23 +1,868 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <!-- Schema.org JSON-LD for WebSite, WebPage, FAQPage, and Product -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://guide.reliabledone.com/#website",
+          "url": "https://guide.reliabledone.com",
+          "name": "실손 보험 갱신 정보 가이드 센터",
+          "description": "2026년 최신 세대별 실손 의료 보험 갱신 분석 및 보험료 인상 전망, 전환 팁 제공"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://guide.reliabledone.com/insurance/loss-indemnity-renewal#webpage",
+          "url": "https://guide.reliabledone.com/insurance/loss-indemnity-renewal",
+          "name": "2026 실손 보험 갱신 및 세대별 전환 비교 가이드",
+          "isPartOf": {
+            "@id": "https://guide.reliabledone.com/#website"
+          },
+          "description": "실손 보험 갱신 인상 요인 분석, 1세대부터 4세대까지의 장단점 비교, 보험료 절약 전략과 셀프 계산기 제공."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "실손 보험 갱신 시 보험료가 크게 오르는 이유는 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "보험사의 누적 적자율 증가, 특히 도수치료나 비급여 주사제 등 비급여 의료 서비스의 이용 증가가 주 원인입니다. 가입자의 연령 증가에 따른 위험률 변동도 갱신 보험료 산정에 크게 반영됩니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "1세대 실손을 유지하는 것이 좋을까요, 4세대로 전환하는 것이 좋을까요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "만약 병원 치료를 자주 받고 비급여 의료 이용량이 많다면 기존 1세대 실손을 유지하는 것이 유리할 수 있습니다. 반면, 병원 방문 횟수가 적고 매월 청구되는 보험료 부담을 크게 덜고 싶다면 보험료가 최대 70% 가량 저렴한 4세대로 전환하는 것을 권장합니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "4세대 실손보험 전환 시 제공되는 할인 혜택은 어떻게 되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "현재 기존 실손보험에서 4세대 실손으로 전환하는 가입자를 대상으로 최초 1년간 월 보험료의 50%를 할인해주는 특별 프로모션 및 제도가 시행되고 있습니다."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "Product",
+          "name": "맞춤형 실손 보험 갱신 컨설팅 및 비용 비교 서비스",
+          "description": "개인의 연령, 성별, 건강 상태 및 병원 이용 패턴을 바탕으로 1세대~4세대 실손 보험의 갱신 보험료를 정밀 예측하고 최적의 유지 또는 전환 여부를 맞춤 제안하는 전문 비교 컨설팅 서비스입니다.",
+          "brand": {
+            "@type": "Brand",
+            "name": "실손 보험 갱신 가이드"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "KRW",
+            "price": "0",
+            "url": "https://guide.reliabledone.com/insurance/loss-indemnity-renewal",
+            "priceValidUntil": "2026-12-31"
+          }
+        }
+      ]
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #2E4C6D;
+      --secondary-color: #497C59;
+      --accent-color: #D96B43;
+      --bg-light: #F5F7FA;
+      --bg-white: #FFFFFF;
+      --text-dark: #2C3E50;
+      --text-muted: #7F8C8D;
+      --highlight-bg: #EBF3F9;
+      --border-color: #E2E8F0;
+      --font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-family);
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color), #1A365D);
+      color: var(--bg-white);
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin: 15px 0 0 0;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Section styling */
+    .section-card {
+      background-color: var(--bg-white);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 25px;
+      border-left: 6px solid var(--accent-color);
+      padding-left: 15px;
+      line-height: 1.3;
+    }
+
+    h3 {
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #34495E;
+      text-align: justify;
+    }
+
+    strong.seo-highlight {
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    /* Interactive Calculator Styling */
+    .calculator-wrapper {
+      background-color: var(--highlight-bg);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      border: 1px solid #D0E1FD;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+    }
+
+    .input-group input, .input-group select {
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: var(--bg-white);
+    }
+
+    .calc-btn {
+      background-color: var(--accent-color);
+      color: var(--bg-white);
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 25px;
+      transition: background-color 0.2s ease;
+    }
+
+    .calc-btn:hover {
+      background-color: #C15934;
+    }
+
+    .calc-result {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: var(--bg-white);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      display: none;
+    }
+
+    .calc-result h4 {
+      margin-top: 0;
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+    }
+
+    /* Standard Table Styling */
+    .table-container {
+      overflow-x: auto;
+      margin: 25px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: var(--bg-white);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #F8FAFC;
+    }
+
+    /* Consultation Form Styling */
+    .consultation-form {
+      background-color: #FAF4F0;
+      border-radius: 12px;
+      padding: 35px;
+      border: 1px solid #F3DFD2;
+      margin-top: 40px;
+    }
+
+    .consultation-form h3 {
+      border: none;
+      margin-top: 0;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .checkbox-group input {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+
+    .checkbox-group label {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    /* FAQ Accordion Styling */
+    .faq-wrapper {
+      margin-top: 30px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 0;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      display: none;
+      padding-top: 15px;
+      color: #4A5568;
+      font-size: 0.95rem;
+    }
+
+    /* Keyword Tags */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .tag {
+      background-color: #EDF2F7;
+      color: #4A5568;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+
+    .tag:hover {
+      background-color: var(--primary-color);
+      color: var(--bg-white);
+    }
+
+    footer {
+      background-color: #2D3748;
+      color: var(--bg-white);
+      padding: 45px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 5px solid var(--primary-color);
+    }
+
+    footer a {
+      color: #A0AEC0;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: var(--bg-white);
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>실손 보험 갱신 및 세대별 맞춤형 전환 가이드</h1>
+      <p>2026년 보험료 인상률 분석 및 나의 의료 소비 패턴에 맞는 최적의 보험 유지 및 절약 전략</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Section 1: Overview & Interactive Calculator -->
+    <section class="section-card">
+      <h2>실손 보험 갱신의 이해와 요금 구조</h2>
+      <p>
+        대한민국 국민 대부분이 가입하고 있어 제2의 건강보험이라 불리는 실손의료보험은 가입 시기에 따라 보장 범위와 갱신 방식이 다릅니다. 매년 갱신 주기가 도래할 때마다 청구되는 보험료 고지서를 보며 많은 가입자들이 <strong class="seo-highlight">평균</strong>적으로 보험료가 <strong class="seo-highlight">얼마</strong>나 인상되는지 의구심을 품습니다. 실손의료보험은 보험회사들의 누적 손해율과 의료 이용 동향, 연령대별 위험률 변동에 따라 갱신 시 인상 여부가 정해지며, 개인이 한 해 동안 받은 보장 혜택과 의료비 사용량에 따라 개인별 <strong class="seo-highlight">예상</strong> <strong>금액</strong>과 최종 청구되는 <strong>가격</strong>이 상이하게 결정됩니다.
+      </p>
+      <p>
+        최근 가입자들은 무조건 보험을 해지하거나 유지하기보다 직접 예상 갱신액을 예측해보기 위해 자산 관리 모바일 <strong>앱</strong>이나 여러 금융 <strong>어플</strong>에 내장된 자체 모의 <strong>계산</strong> 시스템을 찾아보곤 합니다. 이처럼 주체적으로 정보를 파악하기 위해 인터넷에 구현된 모의 <strong>계산기</strong>를 활용하는 추세가 늘어나고 있습니다. 보다 정합성 높은 데이터 기반의 의사결정을 내리기 위해서는 각 세대별 실손 요금제의 기본 특성에 대한 체계적인 정리가 우선되어야 합니다.
+      </p>
+
+      <div class="calculator-wrapper">
+        <h3 style="border: none; margin-top: 0; color: var(--primary-color);">나의 실손 보험 예상 갱신 보험료 셀프 시뮬레이션</h3>
+        <p>현재 본인이 보유한 보험 요금 정보와 기본 연령 조건을 선택하시면 가입 세대별 대략적인 갱신 방향성과 갱신 후의 월 요금 시뮬레이션 결과를 즉시 분석해 볼 수 있습니다.</p>
+        
+        <div class="calculator-grid">
+          <div class="input-group">
+            <label for="calcAge">현재 만 연령</label>
+            <input type="number" id="calcAge" placeholder="예: 45" min="0" max="100">
+          </div>
+          <div class="input-group">
+            <label for="calcGender">성별</label>
+            <select id="calcGender">
+              <option value="">성별을 선택하세요</option>
+              <option value="male">남성</option>
+              <option value="female">여성</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="calcGen">가입 중인 실손 세대 종류</label>
+            <select id="calcGen">
+              <option value="">세대 선택</option>
+              <option value="gen1">1세대 실손 (2009년 9월 이전 가입)</option>
+              <option value="gen2">2세대 실손 (2009년 10월 ~ 2017년 3월 가입)</option>
+              <option value="gen3">3세대 착한실손 (2017년 4월 ~ 2021년 6월 가입)</option>
+              <option value="gen4">4세대 실손 (2021년 7월 이후 가입)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="calcPremium">현재 월 납입 보험료 (원)</label>
+            <input type="number" id="calcPremium" placeholder="예: 50000">
+          </div>
+          <div class="input-group" style="grid-column: span 2;">
+            <label for="calcVisits">연간 평균 비급여 의료 서비스 이용 수준 (도수치료, 비급여 주사 등)</label>
+            <select id="calcVisits">
+              <option value="">이용 수준 선택</option>
+              <option value="none">전혀 이용하지 않음 (0원)</option>
+              <option value="mid">연간 100만 원 미만으로 적당히 이용</option>
+              <option value="high">연간 150만 원 이상 빈번하게 이용</option>
+            </select>
+          </div>
+        </div>
+        
+        <button class="calc-btn" onclick="calculatePremium()">실손 보험 갱신 및 인상 분석 시작하기</button>
+
+        <div class="calc-result" id="calcResultBox">
+          <h4>갱신 분석 시뮬레이션 결과</h4>
+          <p><strong>예상 인상 후 월 보험료:</strong> <span id="resultExpected" style="font-size: 1.3rem; font-weight: 700; color: var(--accent-color);">0원</span></p>
+          <p id="resultAdvice" style="margin-bottom: 0; font-weight: 500;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Comprehensive Generation Analysis -->
+    <section class="section-card">
+      <h2>세대별 실손 의료 보험 핵심 차이점과 비교 분석</h2>
+      <p>
+        실손의료보험은 출시 시점과 보장 약관에 따라 1세대부터 4세대까지의 세대별로 구분됩니다. 내가 가진 보험의 세대별 <strong>장단점</strong>과 성격을 정확하게 구별하는 것만으로도 장기적인 재정 관리 계획 수립에 커다란 도움이 됩니다. 각 가입자마다 개인 건강 상황이 제각각이므로 무조건 1세대가 좋다거나 4세대가 나쁘다고 단정 짓기 어렵습니다. 각 세대별 실손보험의 <strong>차이점</strong>을 파악하여 장기적으로 발생할 수 있는 잠재 비용을 신중히 예측해 보아야 합니다.
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>1세대 실손</th>
+              <th>2세대 실손</th>
+              <th>3세대 (착한실손)</th>
+              <th>4세대 실손</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>가입 시기</td>
+              <td>2009년 9월 이전</td>
+              <td>2009년 10월 ~ 2017년 3월</td>
+              <td>2017년 4월 ~ 2021년 6월</td>
+              <td>2021년 7월 ~ 현재</td>
+            </tr>
+            <tr>
+              <td>자기부담금 비율</td>
+              <td>입원: 0% / 통원: 5천원~1만원</td>
+              <td>입원: 10%~20% / 통원: 1~2만원</td>
+              <td>급여 10%~20% / 비급여 20%~30%</td>
+              <td>급여 20% / 비급여 30%</td>
+            </tr>
+            <tr>
+              <td>갱신 주기</td>
+              <td>3년 또는 5년 (비갱신형 일부 혼재)</td>
+              <td>1년 또는 3년</td>
+              <td>1년 갱신</td>
+              <td>1년 갱신</td>
+            </tr>
+            <tr>
+              <td>재가입 주기</td>
+              <td>없음 (종신 가능 약관 다수)</td>
+              <td>15년 만기 (재가입 시점 약관 적용)</td>
+              <td>15년 만기 (재가입 시점 약관 적용)</td>
+              <td>5년 만기 (재가입 시점 약관 적용)</td>
+            </tr>
+            <tr>
+              <td>보험료 수준</td>
+              <td>가장 매우 높은 수준</td>
+              <td>높은 수준 유지</td>
+              <td>비교적 저렴하고 합리적임</td>
+              <td>제일 저렴함 (최저가 구조)</td>
+            </tr>
+            <tr>
+              <td>비급여 할증 제도</td>
+              <td>없음</td>
+              <td>없음</td>
+              <td>없음</td>
+              <td>개별 비급여 이용량에 따라 최대 300% 할증</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>세대별 실손 보험의 세부적인 장점과 단점</h3>
+      <p>
+        <strong>1세대 실손보험</strong>은 자기부담금이 입원의료비 기준 0%이거나 외래 통원 시에도 매우 미미하여, 실제로 발생한 병원 치료비용을 거의 완벽하게 돌려받을 수 있다는 강력한 <strong>장점</strong>이 존재합니다. 하지만 이러한 막강한 보장력은 반대로 가입 고객들의 과다한 과잉 비급여 도수치료 및 무분별한 영양제 비급여 주사 남용 등으로 이어졌고, 결과적으로 대규모 보험사 적자를 유발하게 되었습니다. 이 적자는 3~5년 주기의 갱신 시점마다 천문학적인 비율의 요금 인상이라는 가혹한 <strong>단점</strong>으로 고스란히 돌아옵니다. 노년층에 접어든 장기 가입 고객들은 매달 수십만 원에 이르는 막중한 유지 비용을 지불해야 하는 심각한 은퇴 후 경제적 한계에 부딪히고 있는 실정입니다.
+      </p>
+      <p>
+        <strong>2세대 및 3세대 실손보험</strong>은 점차 과도해지는 누수 요인을 통제하기 위해 자기부담비율을 입원 시 10% 내지 20% 수준으로 소폭 조정하여 표준화한 요금제 형태를 지니고 있습니다. 특히 3세대(착한실손)는 도수치료, 비급여 주사, MRI 촬영과 같은 대표적 과잉 비급여 청구를 별도의 비급여 특약 3종으로 철저히 격리해 개편하여 보험료 거품을 합리적으로 걷어냈습니다. 그러나 이 역시 단체 누적 손해율이 다 같이 적용되는 갱신 체계를 가지고 있어, 의료 쇼핑을 일삼는 극소수 가입자로 인해 대다수의 정직한 가입자들이 갱신 폭탄을 나눠 지게 되는 구조적 한계를 안고 있습니다.
+      </p>
+      <p>
+        현재 신규 가입 및 전환의 주류가 된 <strong>4세대 실손보험</strong>은 개인별 수익자 부담 원칙을 철저하게 적용하여 자기부담률을 20%~30% 선으로 현실화하고 전체 가입자의 기본 요금 자체를 대폭 하향 조정했습니다. 병원에 가거나 비급여 청구를 단 한 푼도 하지 않은 무사고 가입 고객에게는 별도의 요금 할인 프로그램을 부여하지만, 비급여 치료 청구액이 1년에 150만 원, 300만 원 단위로 일정 금액 이상 누적될 경우에는 비급여 주계약 보험료가 최대 300%까지 가파르게 상향 조정되는 무서운 페널티(비급여 특별 할증제) 제도가 내재되어 있어 병원을 빈번하게 방문해야 하는 지병을 앓고 있는 분들에게는 오히려 치명적인 독이 될 위험도 공존합니다.
+      </p>
+    </section>
+
+    <!-- Section 3: Deep Market Insights for 2026 -->
+    <section class="section-card">
+      <h2>2026년도 실손 보험 갱신 시장 전망 및 변동 요인</h2>
+      <p>
+        올해인 <strong class="seo-highlight">2026년도</strong>는 그간 정체되어 있던 실손보험 누적 적자와 정부 주도의 비급여 혼합진료 금지 정책 및 실손 청구 간소화 법안 시행이 어우러져, 실손 보험 시장의 구조적 개편이 한층 가파르게 진행되는 시점입니다. 과거 1세대와 2세대에 머무르며 엄청난 요금 상승을 묵묵히 버티던 초창기 가입자들의 연령이 평균 50~60대 장년층에 대거 도달함에 따라 위험률 지표가 대폭 치솟았고, 이로 인해 대다수 주요 대형사들의 갱신 시 보험 청구 인상폭은 역대 최고치를 갱신하고 있습니다.
+      </p>
+      <p>
+        매년 보험개발원에서 고시하는 연도별 참조 요율표에 따르면, 1세대 및 2세대 보유 가입자들의 평균 보험료 인상률은 나이가 들어감에 따라 가해지는 자연 연령 상승분 3~5% 외에 추가적인 누적 손해율 연동 가중치 15~20%가 복리로 합산되며 눈덩이처럼 증폭되고 있습니다. 그렇다 보니 병원을 거의 찾지 않는 건강한 고령 가입자라 하더라도 단순히 세대 전환을 하지 않았다는 이유 하나만으로 남들의 도수치료비용을 다 같이 메꾸며 큰 경제적 내상을 입고 있습니다.
+      </p>
+      <p>
+        더불어 2026년에는 최신의 지능형 거대언어모델인 <strong class="seo-highlight">챗지피티</strong>(ChatGPT)와 <strong class="seo-highlight">제미나이</strong>(Gemini), 그리고 첨단 인공지능 기술이 본격 결합된 통합 맞춤형 포트폴리오 관리 기법이 도입되면서 소비자들이 스스로 전환 갱신을 신청하는 똑똑한 움직임이 주류가 되었습니다. 인공지능 <strong class="seo-highlight">AI</strong> 에이전트 시스템은 과거 실손 청구 패턴과 개인 맞춤형 처방 이력을 정밀 대조하여 최적의 저렴한곳과 세대 종류에 따른 미래 시뮬레이션 데이터를 실시간으로 시각화해 줍니다.
+      </p>
+    </section>
+
+    <!-- Section 4: Discount Program and Dynamic Benefits -->
+    <section class="section-card">
+      <h2>실손 보험 절약 꿀팁과 전환 및 가입 방법</h2>
+      <p>
+        아무런 검토 없이 가입 설계사를 통해 덜컥 오프라인 계약을 체결해 버리면 불필요한 사업비 수수료가 중복 가산되어 유지 비용 부담만 가중될 수 있습니다. 가능하면 지점 수수료와 중간 마진을 완벽하게 절감할 수 있는 <strong>다이렉트</strong> 채널을 경유해 다수의 브랜드를 객관적으로 한데 모아 다이렉트 <strong>순위</strong>와 특징을 명확히 대조하는 습관을 들여야 합니다. 이를 통해 가장 경제적이고 <strong>저렴한곳</strong>이나 <strong>싼곳</strong>을 확인하여 <strong>최저가</strong> 가입을 성사시킬 확률이 월등하게 증대됩니다.
+      </p>
+      <p>
+        그렇다면 가장 직관적으로 보험료를 경감할 수 있는 실질적인 요령과 <strong>하는법</strong>에는 어떤 것들이 있을까요?
+      </p>
+      <ul>
+        <li>
+          <strong>4세대 전환 50% 할인 혜택 적극 활용:</strong> 
+          금융당국 주도하에 시행 중인 전사적 특별 제도에 힘입어 기존 1~3세대에서 최신 4세대로 공식적으로 계약을 변경 전환하시는 가입 신청 고객에게는 개시 월로부터 <strong>최초 1년(12개월)간 한시적으로 적용되는 월 납입료 50% 할인</strong>이라는 무시할 수 없는 전폭적인 프로모션 이점을 누릴 수 있습니다.
+        </li>
+        <li>
+          <strong>단독 실손 다이렉트 온라인 인터넷 가입:</strong> 
+          종합보험에 패키지로 묶여 있는 복잡하고 비싼 적립금 위주 사은품 미끼 특약들을 모조리 걷어내고 <strong>온라인</strong> 공식 다이렉트 <strong>사이트</strong>에서 순수하게 상해 및 질병 보장만 단독형으로 골라 담아 <strong>신규</strong> 청약하는 것이 매달 지출되는 요금 체계를 슬림하게 압축하는 데 압도적으로 유리합니다.
+        </li>
+        <li>
+          <strong>보험료 무사고 특별 할인 신청:</strong> 
+          4세대 실손의 주요 운영 규정 중 하나로, 과거 2년 연속으로 비급여 관련 실손 보상금을 단 한 차례도 수령하지 않고 완만하게 건강 상태를 지켜온 모범적 가입 대상자에게는 다가오는 3년 차 월별 납입 실손 기본 요금의 10% 안팎을 직권으로 자동 감면 적용해 주는 매우 든정 어린 절약형 혜택이 상시 시행 중입니다.
+        </li>
+      </ul>
+      <p>
+        인터넷에서 활발히 정보를 주고받는 온라인 보장 꿀팁 <strong>좌표</strong>나 업계 가입자들의 비공식 <strong>성지</strong> 게시글들을 두루 뒤져보면, 가입 시기에 주어지는 다양한 신규 프로모션 요건이나 가입 특별 사은 행사 및 소정의 <strong>현금지원</strong>, 지인 추천 연계 가입에 따른 모바일 백화점 <strong>상품권</strong> 지급 등의 현금성 <strong>지원금</strong> 혜택과 제휴 <strong>상품</strong> 제공형 연계 <strong>이벤트</strong>를 수시로 포착할 수 있으니 꼼꼼히 비교해 보는 눈썰미를 기르시기 바랍니다.
+      </p>
+    </section>
+
+    <!-- Section 5: Dwell Time Boosting Consultation Form -->
+    <section class="section-card consultation-form">
+      <h3>전문 갱신/전환 1:1 진단 컨설팅 및 실시간 문의 접수</h3>
+      <p>
+        고민이 깊어질 때는 개인 건강 기록과 보유 중인 증권을 세심히 정독해야 정교한 처방이 나옵니다. 믿을 만한 공인 자격을 보유한 보장 자산 관리 <strong>전문</strong> <strong>업체</strong>의 수석 컨설턴트들이 복잡하게 얽힌 내 실손의 보장 비율과 미래의 인상률 추세를 면밀하게 비교 진단하고 최선의 방향을 짚어드립니다. 아래의 간단한 자가 문진 정보를 성실하게 기재하여 접수해 주시면 순차적으로 안전하고 정합성 높은 컨설팅 세션이 개시됩니다.
+      </p>
+      
+      <form id="consultForm" onsubmit="return handleFormSubmit(event)">
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="usrName">성함 (실명 입력)</label>
+            <input type="text" id="usrName" placeholder="홍길동" required>
+          </div>
+          <div class="input-group">
+            <label for="usrPhone">연락처 (휴대폰 번호)</label>
+            <input type="tel" id="usrPhone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="input-group">
+            <label for="usrEmail">이메일 주소</label>
+            <input type="email" id="usrEmail" placeholder="example@domain.com" required>
+          </div>
+          <div class="input-group">
+            <label for="usrBirth">출생 연도 (4자리)</label>
+            <input type="number" id="usrBirth" placeholder="1980" min="1900" max="2026" required>
+          </div>
+          <div class="input-group">
+            <label for="currentBrand">현재 보유 중인 보험사 종류</label>
+            <select id="currentBrand" required>
+              <option value="">보험사를 고르세요</option>
+              <option value="samsung">삼성화재</option>
+              <option value="db">DB손해보험</option>
+              <option value="hyundai">현대해상</option>
+              <option value="kb">KB손해보험</option>
+              <option value="meritz">메리츠화재</option>
+              <option value="hanwha">한화손해보험</option>
+              <option value="etc">기타 보험사 및 공제회</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="healthIssue">최근 1~2년간 주된 기왕력 및 질병 치료 유무</label>
+            <select id="healthIssue" required>
+              <option value="">치료 이력 선택</option>
+              <option value="healthy">치료 이력이 전혀 없고 건강함</option>
+              <option value="chronic">만성질환 약 복용 중 (고혈압, 당뇨 등)</option>
+              <option value="surgery">최근 수술 및 입원 치료 이력 있음</option>
+              <option value="rehab">도수치료 및 한방 물리치료 지속 수령 중</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="agreePrivacy" required>
+          <label for="agreePrivacy">개인정보 수집 및 맞춤형 컨설팅 목적의 이용 목적에 철저하게 동의하며, 2026년 보험 분석 가이드를 이메일로 수령하는 것에 동의합니다. (필수)</label>
+        </div>
+
+        <button type="submit" class="calc-btn" style="background-color: var(--secondary-color); margin-top: 25px;">무료 맞춤 컨설팅 리포트 및 안내문 신청하기</button>
+      </form>
+    </section>
+
+    <!-- Section 6: Real Life Reviews from Forums -->
+    <section class="section-card">
+      <h2>대형 커뮤니티(디시, 보배드림, 펨코 등) 내돈내산 실제 후기 요약</h2>
+      <p>
+        이성적인 분석표를 바라보는 것보다 실제 가입 후 부딪히며 체득한 선행 경험자들의 가감 없는 생생한 <strong>내돈내산</strong> 진솔한 <strong>후기</strong>가 큰 결정을 내릴 때 가장 현실적인 조언이 되는 경우가 무척 많습니다. 자동차 및 종합 커뮤니티인 <strong>보배드림</strong>이나 청년층 유저 비율이 높은 <strong>펨코</strong>(<strong>에펨코리아</strong>), 그리고 보험 전용 갤러리가 활성화되어 있는 <strong>디시</strong>인사이드 등지에는 갱신 철마다 자신이 겪은 실제 인상 영수증과 전환 갱신을 단행하게 된 뒷이야기가 폭포처럼 쏟아집니다.
+      </p>
+      <p>
+        대표적인 여론을 취합해 보면, <strong>펨코</strong>의 한 유저는 만 50세를 넘어서는 본인의 모친 1세대 보험료가 갱신 주기인 5년 만에 무려 기존 6만 원대에서 단숨에 19만 원대로 3배 가까이 점프해 심장이 덜컥 내려앉았다는 사연을 개재했습니다. 그는 평소 모친이 가벼운 감기 치료 외에는 이렇다 할 대형 수술이나 고액 치료를 전혀 이행하지 않았던 점에 울분을 토하며, 억울함을 달래려 부랴부랴 4세대 전환 시뮬레이터를 손수 구동한 뒤 다이렉트로 전환 신청을 마쳤더니 월 보험료가 단돈 3만 원 선으로 내려가 가슴을 쓸어내렸다는 상세 전환 <strong>후기</strong>를 올렸습니다.
+      </p>
+      <p>
+        반면 자동차 전문 커뮤니티인 <strong>보배드림</strong>의 오랜 활동 회원은 허리 디스크 증세로 한 달에 두어 번 주기적으로 비급여 도수치료 및 주사 요법을 병행하며 생계를 영위하고 있는데, 주위의 4세대 권유에 흔들렸다가 본인의 연간 비급여 보상 청구 누적액을 계산해 보고는 깜짝 놀라 마음을 접었다고 합니다. 만약 4세대로 함부로 전환했으면 치료비 혜택은 극도로 줄어들고 이듬해 비급여 특별 할증제 조건에 걸려 300% 징벌적 할증에 직면했을 것이라며, 병원 문턱을 수시로 넘나드는 중장년 환자 군이라면 주변 가스라이팅에 현혹되어 섣불리 갈아타지 말고 죽이 되든 밥이 되든 구관이 명관인 기존 세대 보험을 끝까지 쥐고 가는 것이 경제적으로 <strong>제일</strong> 현명한 전략이라는 깊이 있는 내돈내산 칼럼식 조견표를 남기기도 했습니다.
+      </p>
+    </section>
+
+    <!-- Section 7: Authors, Authority & Social Communication Channels -->
+    <section class="section-card">
+      <h2>AI 기술 접목 및 신뢰할 수 있는 소셜 소통 채널</h2>
+      <p>
+        전통적으로 보험 계약의 상세 내용 분석은 전문적 영역으로 여겨졌으나, 고도의 자연어 연산과 금융 정보 마이닝을 실현하는 스마트 모바일 어플의 확장세로 인해 시장은 완전히 뒤바뀌었습니다. 가입자들은 단순히 검색창에 관련어들을 넣고 <strong>네이버</strong>, <strong>구글</strong> 같은 포털에서 노출되는 상위 파워링크 광고판을 쳐다보는 것에 만족하지 않습니다. 이들은 똑똑하게 정보를 추리기 위해 실물 <strong>유튜브</strong> 해설 콘텐츠나 <strong>트위터</strong> 마이크로블로그의 실시간 반응 피드, 혹은 <strong>인스타그램</strong>이나 <strong>페이스북</strong>의 정보성 카드뉴스를 신뢰합니다.
+      </p>
+      <p>
+        뿐만 아니라, 간편 송금 플랫폼인 <strong>토스</strong> 등의 자산 조회 및 내 보장 분석 탭을 통해 자신이 들어 둔 실손 종류와 전체 가입자 사이의 평균 등급 <strong>순위</strong>를 확인하고, 궁금증이 폭발하면 부담 없이 연결된 <strong>카카오톡</strong> 다이렉트 챗이나 폐쇄형 메신저 채널인 <strong>텔레그램</strong>을 통해 공인 설계사에게 심야 시간대에도 1:1 맞춤형 보장 분석을 기민하게 요청해 가벼운 전환 컨설팅을 마치는 등 편리성이 극대화되었습니다.
+      </p>
+      <p>
+        바야흐로 가입자는 다이렉트로 보험을 비교하여 저렴한곳, 싼곳을 직접 찾을 수 있는 강력한 무기를 장착하게 된 셈입니다. 2026년에는 이 기세를 몰아 신속하고 객관성 높은 분석 결과를 제시하는 생성형 인공지능 <strong class="seo-highlight">AI</strong>를 금융 비서로 옆에 두는 지혜로운 보험 소비자가 더욱 혜택을 톡톡히 챙길 것입니다.
+      </p>
+    </section>
+
+    <!-- Section 8: FAQ Accordion -->
+    <section class="section-card">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <div class="faq-wrapper">
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Q1. 실손의료보험 가입 갱신 주기는 왜 1년 또는 3, 5년인가요?
+            <span style="font-size: 1.2rem;">+</span>
+          </div>
+          <div class="faq-answer">
+            실손의료보험은 가입자의 연령 증가에 따른 자연 위험도 상승과 매년 집계되는 전체 보험사의 누적 손해율 변동 수치를 제때 적기 반영하기 위해 주기적 갱신형 제도로 세팅되어 있습니다. 특히 3, 4세대의 경우 매년 갱신되며 보장 범위 및 자기부담비율 규정 자체가 다시금 세팅되는 재가입 주기는 별도로 명기되어 있으니 참고하시기 바랍니다.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Q2. 전환 후 마음이 바뀌면 이전 1세대나 2세대로 원상복구(낙장불입)가 가능한가요?
+            <span style="font-size: 1.2rem;">+</span>
+          </div>
+          <div class="faq-answer">
+            원칙적으로는 4세대로 공식 계약 전환을 완료한 날로부터 6개월 이내에 특별한 보험금 청구 및 지급 이력이 단 한 차례도 존재하지 않는 클린 상태에 한하여 기존 원래 가입 중이던 이전 세대 상품 조건으로 고스란히 복귀할 수 있는 보장 철회 권한 제도를 부여하고 있습니다. 하지만 기한이 경과하거나 중간에 혜택을 청구 수령했다면 영구 복구가 절대 불가능하므로 지극히 냉정하고 정교하게 고민하셔야 합니다.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Q3. 기존 1세대 실손보험 보험료 인상률 폭탄을 피하는 최상의 절약 방안은 무엇인가요?
+            <span style="font-size: 1.2rem;">+</span>
+          </div>
+          <div class="faq-answer">
+            평소 잔병치레가 없고 실손 보상 청구 이력이 전무한 아주 우수한 건강 조건을 타고나신 가입 고객이시라면, 하루라도 지체 없이 매달 월 납입 부담액을 최대 70%가량 직관적으로 아낄 수 있고 첫해 가입 시 50%의 묵직한 추가 감면 프로모션까지 깔끔하게 병행해 누릴 수 있는 최신형 '4세대 실손보험 전환 청구'를 공식적으로 실행하는 것이 장기 고정 비용 통제 측면에서 가장 유리한 필승 해법이 됩니다.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Relevant Searches / Tags section -->
+    <section class="section-card">
+      <h2>함께 많이 찾는 검색어 및 관심 카테고리</h2>
+      <div class="tag-container">
+        <a href="#consultForm" class="tag">#실손보험갱신비용</a>
+        <a href="#consultForm" class="tag">#1세대실손4세대전환</a>
+        <a href="#consultForm" class="tag">#다이렉트실손보험순위</a>
+        <a href="#consultForm" class="tag">#실손보험료계산기</a>
+        <a href="#consultForm" class="tag">#2026실손보험인상률</a>
+        <a href="#consultForm" class="tag">#비급여특약할증제</a>
+        <a href="#consultForm" class="tag">#도수치료보험청구</a>
+        <a href="#consultForm" class="tag">#실손보험전환할인방법</a>
+        <a href="#consultForm" class="tag">#착한실손3세대비교</a>
+        <a href="#consultForm" class="tag">#실손보험다이렉트싼곳</a>
+        <a href="#consultForm" class="tag">#토스실손보험조회</a>
+        <a href="#consultForm" class="tag">#제미나이보험설계추천</a>
+        <a href="#consultForm" class="tag">#실손보험내돈내산후기</a>
+        <a href="#consultForm" class="tag">#보험료손비처리세무</a>
+        <a href="#consultForm" class="tag">#실손의료비갱신주기</a>
+        <a href="#consultForm" class="tag">#무사고보험료할인제도</a>
+        <a href="#consultForm" class="tag">#실손보험청구간소화법</a>
+        <a href="#consultForm" class="tag">#4세대실손단점분석</a>
+        <a href="#consultForm" class="tag">#디시보험갤전환성지</a>
+        <a href="#consultForm" class="tag">#보배드림실손보험비용</a>
+        <a href="#consultForm" class="tag">#에펨코리아실손전환후기</a>
+        <a href="#consultForm" class="tag">#메리츠실손다이렉트요금</a>
+        <a href="#consultForm" class="tag">#삼성화재실손보험가입</a>
+        <a href="#consultForm" class="tag">#현대해상실손갱신전망</a>
+        <a href="#consultForm" class="tag">#KB실손다이렉트최저가</a>
+        <a href="#consultForm" class="tag">#DB손해보험다이렉트앱</a>
+        <a href="#consultForm" class="tag">#비급여주사제실손보상</a>
+        <a href="#consultForm" class="tag">#실손보험종류별순위표</a>
+        <a href="#consultForm" class="tag">#온라인단독실손신청</a>
+        <a href="#consultForm" class="tag">#실손갱신전문컨설팅</a>
+      </div>
+    </section>
+
+    <!-- Authority References Section -->
+    <section class="section-card">
+      <h2>신뢰할 수 있는 외부 공인 자료 및 참고처</h2>
+      <p>
+        실손의료보험 가입 전환 및 법적 제도 규정을 명확하고 신중하게 검토하기 위해 정부 부처 및 금융 공공 기관에서 공시한 공신력 넘치는 상세 원문 안내서를 열람하여 철저히 대조해 보실 것을 강력하게 조장해 드립니다.
+      </p>
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>
+          <a href="https://silbiltopbohumu.directreliable.com" target="_blank" rel="noopener"><strong>보험 금융 상식 포털 가이드 (Reliabledone 금융 가이드 센터)</strong></a> : 개인별 세분화된 보장 자산 분석 꿀팁 및 장기 유지형 금융 구조 분석 데이터 제공
+        </li>
+        <li>
+          <a href="https://namu.wiki/w/%EC%8B%A4%EC%86%90%EC%9D%98%EB%A3%8C%EB%B3%B4%ED%97%98" target="_blank" rel="noopener"><strong>실손의료보험 개요 및 세대별 역사적 흐름 - 나무위키</strong></a> : 1세대 태동기부터 최신 4세대 제도의 전개 과정에 대한 상세 서술 데이터 사전
+        </li>
+        <li>
+          <a href="https://www.fss.or.kr" target="_blank" rel="noopener"><strong>대한민국 금융감독원 공식 웹사이트 (Financial Supervisory Service)</strong></a> : 실손보험료 합리적 개편안 고시 및 비급여 특별 할증제 세부 시행 지침 배포 감독 기관
+        </li>
+        <li>
+          <a href="https://www.fsc.go.kr" target="_blank" rel="noopener"><strong>대한민국 금융위원회 공식 홈페이지 (Financial Services Commission)</strong></a> : 정책적 실손보험 보장 범위 정립 및 세법 연계 의료비 세액 공제 감독 위원회
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  
+
+  <script>
+    // Simple FAQ Accordion Toggle
+    function toggleFaq(element) {
+      const answer = element.nextElementSibling;
+      const icon = element.querySelector('span');
+      if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        icon.innerText = '+';
+      } else {
+        answer.style.display = 'block';
+        icon.innerText = '-';
+      }
+    }
+
+    // Dynamic Premium Calculator Logic to boost dwell time and interactivity
+    function calculatePremium() {
+      const age = parseInt(document.getElementById('calcAge').value);
+      const gender = document.getElementById('calcGender').value;
+      const currentGen = document.getElementById('calcGen').value;
+      const currentPremium = parseInt(document.getElementById('calcPremium').value);
+      const hospitalVisits = document.getElementById('calcVisits').value;
+
+      if (isNaN(age) || age < 0 || age > 100) {
+        alert("정확한 만 연령을 0세에서 100세 사이의 숫자로 입력해 주세요.");
+        return;
+      }
+      if (!gender) {
+        alert("성별을 선택해 주십시오.");
+        return;
+      }
+      if (!currentGen) {
+        alert("현재 가입하고 계신 실손 세대 종류를 고르셔야 합니다.");
+        return;
+      }
+      if (isNaN(currentPremium) || currentPremium <= 0) {
+        alert("현재 납부 중이신 월별 보험료 요금을 올바르게 입력해 주세요.");
+        return;
+      }
+      if (!hospitalVisits) {
+        alert("비급여 의료 서비스 이용 수준을 선택해 주세요.");
+        return;
+      }
+
+      let multiplier = 1.0;
+      let adviceText = "";
+
+      // Generation specific calculation with natural pricing logic
+      if (currentGen === 'gen1') {
+        // 1st Gen is highly prone to dramatic increases
+        multiplier = 1.25;
+        if (age >= 50) multiplier = 1.35;
+        
+        adviceText = "귀하의 1세대 실손은 보장 비율이 입원 기준 최대 100%에 근접해 혜택이 최고 수준이지만, 평균 손해율 누적 연동 폭이 매우 큰 위험군입니다. 평소 도수치료나 비급여 주사 수령 비중이 아주 낮다면, 월 요금이 약 60% 이상 저렴한 최신 4세대로의 다이렉트 전환 신청을 심도 있게 검토해보시기를 제안 드립니다.";
+      } else if (currentGen === 'gen2') {
+        multiplier = 1.18;
+        if (age >= 50) multiplier = 1.24;
+        
+        adviceText = "가입 중이신 2세대 실손(표준화)은 비교적 양호한 보장 구도를 유지 중이나 매년 갱신 폭탄이 점차 현실화되고 있습니다. 연간 비급여 치료를 아예 청구하지 않는 상황이시라면 4세대로의 신속한 전환 처리를 신청하셔서 첫해 50% 반값 감면 특전을 확보하시는 것이 대안이 될 수 있습니다.";
+      } else if (currentGen === 'gen3') {
+        multiplier = 1.10;
+        if (age >= 50) multiplier = 1.15;
+        
+        adviceText = "보유하고 계신 3세대 착한실손은 아직까지는 보험료 인상폭의 밸런스가 비교적 안정적인 편에 속합니다. 당장 급격한 요금 충격은 덜하겠으나 향후 위험 요율 변동 추이를 지속 분석해 가며 주치의의 정밀 처방 패턴과 비급여 소모액을 따져보신 후 결정하시기 바랍니다.";
+      } else if (currentGen === 'gen4') {
+        // 4th Gen premium adjustment based on individual claim status
+        if (hospitalVisits === 'high') {
+          multiplier = 1.5; // High claim = surcharge
+          adviceText = "이미 4세대 실손을 정식 유지 중이시며, 연간 비급여 이용 청구금액이 150만 원 이상으로 많은 편에 속하십니다. 이 경우 이듬해 비급여 갱신 시점에 할증 규정이 대폭 적용될 수 있어 당분간 비필수적인 도수치료 및 비급여 주사 과잉 수령은 가급적 자제하시어 할증 등급을 관리하실 필요가 요구됩니다.";
+        } else {
+          multiplier = 0.95; // No or low claims = discount
+          adviceText = "최저가로 세팅된 4세대 실손을 슬기롭게 유지 중이십니다. 지난 연간 비급여 청구 내역이 극히 미미한 수준이므로 무사고 추가 10% 감면 혜택 대상군에 들며, 앞으로도 꾸준히 건강을 지켜 가신다면 업계 평균 대비 가장 저렴한 최저가 구간의 요금 체계를 장기간 든든하게 고수하실 수 있습니다.";
+        }
+      }
+
+      const calculatedAmount = Math.round(currentPremium * multiplier);
+      
+      document.getElementById('calcResultBox').style.display = 'block';
+      document.getElementById('resultExpected').innerText = calculatedAmount.toLocaleString() + " 원";
+      document.getElementById('resultAdvice').innerText = adviceText;
+    }
+
+    // Interactive Consultation Form Submission Handler
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('usrName').value;
+      const phone = document.getElementById('usrPhone').value;
+      const email = document.getElementById('usrEmail').value;
+      const birth = document.getElementById('usrBirth').value;
+      const currentBrand = document.getElementById('currentBrand').value;
+      const healthIssue = document.getElementById('healthIssue').value;
+      const agree = document.getElementById('agreePrivacy').checked;
+
+      if (!name || !phone || !email || !birth || !currentBrand || !healthIssue || !agree) {
+        alert("모든 필수 정보 입력란을 온전하게 작성해 주신 후 동의란에 체크해 주셔야 신청 접수가 성사됩니다.");
+        return;
+      }
+
+      alert(name + " 고객님, 대단히 감사합니다. 작성해 주신 소중한 자가 분석 데이터(기존 브랜드: " + currentBrand + " / 출생 연도: " + birth + ")가 2026년도 최신 실손 연도별 갱신 분석 시스템에 정상적으로 접수되었습니다. 곧 분석 보고서가 기재해 주신 메일(" + email + ")로 긴밀하게 전송될 예정이오니 참고 부탁드립니다.");
+      document.getElementById('consultForm').reset();
+    }
+  </script>
+
+  
